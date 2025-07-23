@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive IPA Chart with Audio Examples</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Noto Sans", Arial, sans-serif;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      h1,
+      h2 {
+        text-align: center;
+        margin: 25px 0 15px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+        table-layout: fixed;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+        vertical-align: middle;
+      }
+      th {
+        background-color: #f8f9fa;
+        height: 60px;
+        font-weight: 600;
+        position: sticky;
+        top: 0;
+      }
+      td {
+        height: 90px;
+        overflow: auto;
+      }
+      .audio-cell {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 40px;
+      }
+      .play-btn {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 0.9em;
+        min-width: 65px;
+        white-space: nowrap;
+        transition: background-color 0.2s;
+      }
+      .play-btn:hover {
+        background-color: #3e8e41;
+      }
+      .play-btn:focus {
+        outline: 2px solid #007bff;
+        outline-offset: 2px;
+      }
+      .korean-desc {
+        font-size: 0.85em;
+        color: #555;
+        line-height: 1.5;
+      }
+      .example-sentence {
+        line-height: 1.5;
+        margin-bottom: 5px;
+      }
+      @media (max-width: 768px) {
+        body {
+          padding: 15px;
+        }
+        th,
+        td {
+          padding: 8px;
+          font-size: 0.9em;
+        }
+        td {
+          height: auto;
+          min-height: 80px;
+        }
+        .play-btn {
+          padding: 4px 8px;
+          min-width: 55px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Interactive IPA Chart with Audio Examples</h1>
+    <p>
+      This chart provides IPA symbols for American English pronunciation with
+      text-to-speech audio. Click "Play" to hear the word or sentence.
+    </p>
+
+    <h2>Vowels</h2>
+    <table aria-label="IPA Vowels Chart">
+      <thead>
+        <tr>
+          <th scope="col" style="width: 10%">IPA</th>
+          <th scope="col" style="width: 20%">Example Word</th>
+          <th scope="col" style="width: 15%">Pronunciation</th>
+          <th scope="col" style="width: 25%">Korean Description</th>
+          <th scope="col" style="width: 30%">
+            Example Sentence (IPA & Korean Translation)
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>/iː/</td>
+          <td class="audio-cell">
+            see <button class="play-btn" onclick="speak('see')">Play</button>
+          </td>
+          <td>/ˈsiː/</td>
+          <td class="korean-desc">
+            입술을 약간 벌리고 혀를 입천장 가까이 올려 긴 "이" 소리. 한국어
+            "시"와 비슷하지만 더 길게.
+          </td>
+          <td class="example-sentence">
+            /aɪ kæn siː ðə siː/ <br />
+            I can see the sea. <br />
+            (나는 바다를 볼 수 있다.)
+            <button class="play-btn" onclick="speak('I can see the sea')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/ɪ/</td>
+          <td class="audio-cell">
+            sit <button class="play-btn" onclick="speak('sit')">Play</button>
+          </td>
+          <td>/ˈsɪt/</td>
+          <td class="korean-desc">
+            짧고 빠른 "이" 소리. 혀를 약간 낮추고 입을 살짝 벌림. 한국어
+            "시"보다 짧고 약함.
+          </td>
+          <td class="example-sentence">
+            /pliːz sɪt hɪr/ <br />
+            Please sit here. <br />
+            (여기에 앉아 주세요.)
+            <button class="play-btn" onclick="speak('Please sit here')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/e/</td>
+          <td class="audio-cell">
+            bed <button class="play-btn" onclick="speak('bed')">Play</button>
+          </td>
+          <td>/ˈbed/</td>
+          <td class="korean-desc">
+            중간 높이의 "에" 소리. 한국어 "에"와 비슷하지만 더 단단하게.
+          </td>
+          <td class="example-sentence">
+            /ðə bed ɪz red/ <br />
+            The bed is red. <br />
+            (그 침대는 빨간색이다.)
+            <button class="play-btn" onclick="speak('The bed is red')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/æ/</td>
+          <td class="audio-cell">
+            cat <button class="play-btn" onclick="speak('cat')">Play</button>
+          </td>
+          <td>/ˈkæt/</td>
+          <td class="korean-desc">
+            입을 넓게 벌리고 혀를 낮춘 "애" 소리. 한국어 "앤"과 유사.
+          </td>
+          <td class="example-sentence">
+            /ðə blæk kæt sæt/ <br />
+            The black cat sat. <br />
+            (검은 고양이가 앉았다.)
+            <button class="play-btn" onclick="speak('The black cat sat')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/ɑː/</td>
+          <td class="audio-cell">
+            father
+            <button class="play-btn" onclick="speak('father')">Play</button>
+          </td>
+          <td>/ˈfɑːðər/</td>
+          <td class="korean-desc">
+            입을 크게 벌리고 혀를 낮춘 긴 "아" 소리. 한국어 "아"보다 깊게.
+          </td>
+          <td class="example-sentence">
+            /maɪ ˈfɑːðər ɪz kɑːm/ <br />
+            My father is calm. <br />
+            (내 아버지는 차분하다.)
+            <button class="play-btn" onclick="speak('My father is calm')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/ɔː/</td>
+          <td class="audio-cell">
+            saw <button class="play-btn" onclick="speak('saw')">Play</button>
+          </td>
+          <td>/ˈsɔː/</td>
+          <td class="korean-desc">
+            입술을 둥글게 하고 혀를 뒤로 낮춘 긴 "오" 소리. 한국어 "오"와 비슷.
+          </td>
+          <td class="example-sentence">
+            /aɪ sɔː ðə dɔːn/ <br />
+            I saw the dawn. <br />
+            (나는 새벽을 보았다.)
+            <button class="play-btn" onclick="speak('I saw the dawn')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/ʊ/</td>
+          <td class="audio-cell">
+            book <button class="play-btn" onclick="speak('book')">Play</button>
+          </td>
+          <td>/ˈbʊk/</td>
+          <td class="korean-desc">
+            짧은 "우" 소리. 입술을 살짝 둥글게 하고 혀를 뒤로. 한국어 "우"보다
+            짧음.
+          </td>
+          <td class="example-sentence">
+            /riːd ðɪs bʊk/ <br />
+            Read this book. <br />
+            (이 책을 읽어.)
+            <button class="play-btn" onclick="speak('Read this book')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/uː/</td>
+          <td class="audio-cell">
+            moon <button class="play-btn" onclick="speak('moon')">Play</button>
+          </td>
+          <td>/ˈmuːn/</td>
+          <td class="korean-desc">
+            입술을 둥글게 하고 혀를 뒤로 올린 긴 "우" 소리. 한국어 "우"와 비슷.
+          </td>
+          <td class="example-sentence">
+            /ðə muːn ɪz fʊl/ <br />
+            The moon is full. <br />
+            (달이 차 있다.)
+            <button class="play-btn" onclick="speak('The moon is full')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/ʌ/</td>
+          <td class="audio-cell">
+            cup <button class="play-btn" onclick="speak('cup')">Play</button>
+          </td>
+          <td>/ˈkʌp/</td>
+          <td class="korean-desc">
+            혀를 중간에 두고 짧은 "어" 소리. 한국어 "어"와 비슷하지만 더 짧음.
+          </td>
+          <td class="example-sentence">
+            /fɪl ðə kʌp ʌp/ <br />
+            Fill the cup up. <br />
+            (컵을 채워.)
+            <button class="play-btn" onclick="speak('Fill the cup up')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/ɜː/</td>
+          <td class="audio-cell">
+            bird <button class="play-btn" onclick="speak('bird')">Play</button>
+          </td>
+          <td>/ˈbɜːrd/</td>
+          <td class="korean-desc">
+            혀를 중간에 두고 긴 "어" 소리. 한국어 "어"보다 길고 강함.
+          </td>
+          <td class="example-sentence">
+            /ðə bɜːrd hɜːrd wɜːrdz/ <br />
+            The bird heard words. <br />
+            (새가 말을 들었다.)
+            <button class="play-btn" onclick="speak('The bird heard words')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/ə/</td>
+          <td class="audio-cell">
+            about
+            <button class="play-btn" onclick="speak('about')">Play</button>
+          </td>
+          <td>/əˈbaʊt/</td>
+          <td class="korean-desc">
+            약하고 중립적인 "어" 소리. 한국어 비강세 음절의 "어"와 유사.
+          </td>
+          <td class="example-sentence">
+            /wɑːts ɪt əˈbaʊt/ <br />
+            What's it about? <br />
+            (그건 뭐에 관한 거지?)
+            <button class="play-btn" onclick="speak('What\'s it about')">
+              Play
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Diphthongs</h2>
+    <table aria-label="IPA Diphthongs Chart">
+      <thead>
+        <tr>
+          <th scope="col" style="width: 10%">IPA</th>
+          <th scope="col" style="width: 20%">Example Word</th>
+          <th scope="col" style="width: 15%">Pronunciation</th>
+          <th scope="col" style="width: 25%">Korean Description</th>
+          <th scope="col" style="width: 30%">
+            Example Sentence (IPA & Korean Translation)
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>/eɪ/</td>
+          <td class="audio-cell">
+            day <button class="play-btn" onclick="speak('day')">Play</button>
+          </td>
+          <td>/ˈdeɪ/</td>
+          <td class="korean-desc">
+            "에"에서 "이"로 미끄러지는 소리. 혀를 중간 높이에서 시작해 올리며
+            발음. 한국어 "데이"와 비슷.
+          </td>
+          <td class="example-sentence">
+            /hæv ə naɪs deɪ/ <br />
+            Have a nice day! <br />
+            (좋은 하루 보내세요!)
+            <button class="play-btn" onclick="speak('Have a nice day')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/aɪ/</td>
+          <td class="audio-cell">
+            time <button class="play-btn" onclick="speak('time')">Play</button>
+          </td>
+          <td>/ˈtaɪm/</td>
+          <td class="korean-desc">
+            "아"에서 "이"로 미끄러지는 소리. 한국어 "아이"와 유사.
+          </td>
+          <td class="example-sentence">
+            /taɪm flaɪz baɪ/ <br />
+            Time flies by. <br />
+            (시간이 빨리 지나간다.)
+            <button class="play-btn" onclick="speak('Time flies by')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/ɔɪ/</td>
+          <td class="audio-cell">
+            boy <button class="play-btn" onclick="speak('boy')">Play</button>
+          </td>
+          <td>/ˈbɔɪ/</td>
+          <td class="korean-desc">
+            "오"에서 "이"로 빠르게 미끄러지는 소리. 입을 둥글게 한 뒤 혀를
+            올리며 입술을 좁힘. 한국어 "보이"와 유사.
+          </td>
+          <td class="example-sentence">
+            /ðə bɔɪ ɪz ˈnɔɪzi/ <br />
+            The boy is noisy. <br />
+            (그 소년은 시끄럽다.)
+            <button class="play-btn" onclick="speak('The boy is noisy')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/aʊ/</td>
+          <td class="audio-cell">
+            now <button class="play-btn" onclick="speak('now')">Play</button>
+          </td>
+          <td>/ˈnaʊ/</td>
+          <td class="korean-desc">
+            "아"에서 "우"로 미끄러지는 소리. 한국어 "아우"와 비슷.
+          </td>
+          <td class="example-sentence">
+            /duː ɪt raɪt naʊ/ <br />
+            Do it right now. <br />
+            (지금 당장 해라.)
+            <button class="play-btn" onclick="speak('Do it right now')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/oʊ/</td>
+          <td class="audio-cell">
+            go <button class="play-btn" onclick="speak('go')">Play</button>
+          </td>
+          <td>/ˈgoʊ/</td>
+          <td class="korean-desc">
+            "오"에서 "우"로 미끄러지는 소리. 한국어 "오우"와 유사.
+          </td>
+          <td class="example-sentence">
+            /lets goʊ hoʊm/ <br />
+            Let's go home. <br />
+            (집에 가자.)
+            <button class="play-btn" onclick="speak('Let\'s go home')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/ɪə/</td>
+          <td class="audio-cell">
+            here <button class="play-btn" onclick="speak('here')">Play</button>
+          </td>
+          <td>/ˈhɪr/</td>
+          <td class="korean-desc">
+            "이"에서 "어"로 미끄러지는 소리. 미국식은 /ɪr/로 단순화. 한국어
+            "히어"와 비슷.
+          </td>
+          <td class="example-sentence">
+            /kʌm ˈoʊvər hɪr/ <br />
+            Come over here. <br />
+            (여기로 와.)
+            <button class="play-btn" onclick="speak('Come over here')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/ɛə/</td>
+          <td class="audio-cell">
+            hair <button class="play-btn" onclick="speak('hair')">Play</button>
+          </td>
+          <td>/ˈhɛr/</td>
+          <td class="korean-desc">
+            "에"에서 "어"로 미끄러지는 소리. 미국식은 /ɛr/로 단순화. 한국어
+            "헤어"와 비슷.
+          </td>
+          <td class="example-sentence">
+            /hɜːr hɛr ɪz fɛr/ <br />
+            Her hair is fair. <br />
+            (그녀의 머리카락은 곱다.)
+            <button class="play-btn" onclick="speak('Her hair is fair')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/ʊə/</td>
+          <td class="audio-cell">
+            tour <button class="play-btn" onclick="speak('tour')">Play</button>
+          </td>
+          <td>/ˈtʊr/</td>
+          <td class="korean-desc">
+            "우"에서 "어"로 미끄러지는 소리. 미국식은 /ʊr/로 단순화. 한국어
+            "투어"와 비슷.
+          </td>
+          <td class="example-sentence">
+            /ɪnˈdʒɔɪ jʊr tʊr/ <br />
+            Enjoy your tour. <br />
+            (여행을 즐겨.)
+            <button class="play-btn" onclick="speak('Enjoy your tour')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/juː/</td>
+          <td class="audio-cell">
+            cute <button class="play-btn" onclick="speak('cute')">Play</button>
+          </td>
+          <td>/ˈkjuːt/</td>
+          <td class="korean-desc">
+            "이"와 "우"가 결합된 긴 소리. 한국어 "큐"와 비슷.
+          </td>
+          <td class="example-sentence">
+            /ðə ˈbeɪbi ɪz kjuːt/ <br />
+            The baby is cute. <br />
+            (그 아기는 귀엽다.)
+            <button class="play-btn" onclick="speak('The baby is cute')">
+              Play
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Consonants</h2>
+    <table aria-label="IPA Consonants Chart">
+      <thead>
+        <tr>
+          <th scope="col" style="width: 10%">IPA</th>
+          <th scope="col" style="width: 20%">Example Word</th>
+          <th scope="col" style="width: 15%">Pronunciation</th>
+          <th scope="col" style="width: 25%">Korean Description</th>
+          <th scope="col" style="width: 30%">
+            Example Sentence (IPA & Korean Translation)
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>/p/</td>
+          <td class="audio-cell">
+            pen <button class="play-btn" onclick="speak('pen')">Play</button>
+          </td>
+          <td>/ˈpen/</td>
+          <td class="korean-desc">
+            입술을 다물고 공기를 터뜨리며 내는 무성음 "ㅍ". 한국어 "펜"의 "ㅍ"와
+            비슷하지만 더 강한 공기 배출.
+          </td>
+          <td class="example-sentence">
+            /pæs mi ðə pen/ <br />
+            Pass me the pen. <br />
+            (펜을 나에게 건네줘.)
+            <button class="play-btn" onclick="speak('Pass me the pen')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/b/</td>
+          <td class="audio-cell">
+            bad <button class="play-btn" onclick="speak('bad')">Play</button>
+          </td>
+          <td>/ˈbæd/</td>
+          <td class="korean-desc">
+            입술을 다물고 성대를 울리며 내는 유성음 "ㅂ". 한국어 "배"의 "ㅂ"와
+            유사.
+          </td>
+          <td class="example-sentence">
+            /ðæts nɑːt bæd/ <br />
+            That's not bad. <br />
+            (그건 나쁘지 않아.)
+            <button class="play-btn" onclick="speak('That\'s not bad')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/t/</td>
+          <td class="audio-cell">
+            tea <button class="play-btn" onclick="speak('tea')">Play</button>
+          </td>
+          <td>/ˈtiː/</td>
+          <td class="korean-desc">
+            무성음 "ㅌ". 혀를 잇몸에 대고 공기를 터뜨림. 한국어 "티"의 "ㅌ".
+          </td>
+          <td class="example-sentence">
+            /aɪ drɪŋk tiː ˈdeɪli/ <br />
+            I drink tea daily. <br />
+            (나는 매일 차를 마신다.)
+            <button class="play-btn" onclick="speak('I drink tea daily')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/d/</td>
+          <td class="audio-cell">
+            dog <button class="play-btn" onclick="speak('dog')">Play</button>
+          </td>
+          <td>/ˈdɑːɡ/</td>
+          <td class="korean-desc">
+            유성음 "ㄷ". 성대를 울리며 혀를 잇몸에. 한국어 "디"의 "ㄷ".
+          </td>
+          <td class="example-sentence">
+            /ðə dɑːɡ dɪɡz/ <br />
+            The dog digs. <br />
+            (그 개가 판다.)
+            <button class="play-btn" onclick="speak('The dog digs')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/k/</td>
+          <td class="audio-cell">
+            cat <button class="play-btn" onclick="speak('cat')">Play</button>
+          </td>
+          <td>/ˈkæt/</td>
+          <td class="korean-desc">
+            무성음 "ㅋ". 혀를 목구멍에 대고 공기를 터뜨림. 한국어 "키"의 "ㅋ".
+          </td>
+          <td class="example-sentence">
+            /ðə kæt ɪz blæk/ <br />
+            The cat is black. <br />
+            (그 고양이는 검다.)
+            <button class="play-btn" onclick="speak('The cat is black')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/g/</td>
+          <td class="audio-cell">
+            go <button class="play-btn" onclick="speak('go')">Play</button>
+          </td>
+          <td>/ˈgoʊ/</td>
+          <td class="korean-desc">
+            유성음 "ㄱ". 성대를 울리며 혀를 목구멍에. 한국어 "기"의 "ㄱ".
+          </td>
+          <td class="example-sentence">
+            /goʊ ɡɛt ɪt/ <br />
+            Go get it! <br />
+            (가서 가져와!)
+            <button class="play-btn" onclick="speak('Go get it')">Play</button>
+          </td>
+        </tr>
+        <tr>
+          <td>/f/</td>
+          <td class="audio-cell">
+            fish <button class="play-btn" onclick="speak('fish')">Play</button>
+          </td>
+          <td>/ˈfɪʃ/</td>
+          <td class="korean-desc">
+            무성음 "ㅍ". 아랫입술과 윗니로 공기를 뿜음. 한국어 "피"와 비슷.
+          </td>
+          <td class="example-sentence">
+            /frɛʃ fraɪd fɪʃ/ <br />
+            Fresh fried fish. <br />
+            (신선한 튀긴 생선.)
+            <button class="play-btn" onclick="speak('Fresh fried fish')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/v/</td>
+          <td class="audio-cell">
+            voice
+            <button class="play-btn" onclick="speak('voice')">Play</button>
+          </td>
+          <td>/ˈvɔɪs/</td>
+          <td class="korean-desc">
+            유성음 "ㅂ". 성대를 울리며 아랫입술과 윗니로. 한국어에 없는 소리.
+          </td>
+          <td class="example-sentence">
+            /hɜːr vɔɪs ɪz sɑːft/ <br />
+            Her voice is soft. <br />
+            (그녀의 목소리는 부드럽다.)
+            <button class="play-btn" onclick="speak('Her voice is soft')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/θ/</td>
+          <td class="audio-cell">
+            think
+            <button class="play-btn" onclick="speak('think')">Play</button>
+          </td>
+          <td>/ˈθɪŋk/</td>
+          <td class="korean-desc">
+            무성음. 혀를 이빨 사이에 넣고 공기를 뿜음. 한국어에 없는 "쓰" 비슷.
+          </td>
+          <td class="example-sentence">
+            /θɪŋk bɪˈfɔːr ˈspiːkɪŋ/ <br />
+            Think before speaking. <br />
+            (말하기 전에 생각해라.)
+            <button class="play-btn" onclick="speak('Think before speaking')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/ð/</td>
+          <td class="audio-cell">
+            this <button class="play-btn" onclick="speak('this')">Play</button>
+          </td>
+          <td>/ˈðɪs/</td>
+          <td class="korean-desc">
+            유성음. 성대를 울리며 혀를 이빨 사이로. 한국어에 없는 "드" 비슷.
+          </td>
+          <td class="example-sentence">
+            /ðɪs ɪz ðə wʌn/ <br />
+            This is the one. <br />
+            (이게 그거야.)
+            <button class="play-btn" onclick="speak('This is the one')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/s/</td>
+          <td class="audio-cell">
+            sun <button class="play-btn" onclick="speak('sun')">Play</button>
+          </td>
+          <td>/ˈsʌn/</td>
+          <td class="korean-desc">
+            무성음 "ㅅ". 혀를 잇몸에 대고 공기를 뿜음. 한국어 "시"의 "ㅅ".
+          </td>
+          <td class="example-sentence">
+            /ðə sʌn ɪz braɪt/ <br />
+            The sun is bright. <br />
+            (태양이 밝다.)
+            <button class="play-btn" onclick="speak('The sun is bright')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/z/</td>
+          <td class="audio-cell">
+            zoo <button class="play-btn" onclick="speak('zoo')">Play</button>
+          </td>
+          <td>/ˈzuː/</td>
+          <td class="korean-desc">
+            유성음 "ㅈ". 성대를 울리며 혀를 잇몸에. 한국어 "지"의 "ㅈ"와 비슷.
+          </td>
+          <td class="example-sentence">
+            /lets ˈvɪzɪt ðə zuː/ <br />
+            Let's visit the zoo. <br />
+            (동물원에 가자.)
+            <button class="play-btn" onclick="speak('Let\'s visit the zoo')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/ʃ/</td>
+          <td class="audio-cell">
+            shoe <button class="play-btn" onclick="speak('shoe')">Play</button>
+          </td>
+          <td>/ˈʃuː/</td>
+          <td class="korean-desc">
+            무성음 "ㅅ". 입술을 둥글게 하고 혀를 살짝 올림. 한국어 "시"보다
+            부드러움.
+          </td>
+          <td class="example-sentence">
+            /njuː ʃuːz hɜːrt/ <br />
+            New shoes hurt. <br />
+            (새 신발이 아프다.)
+            <button class="play-btn" onclick="speak('New shoes hurt')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/ʒ/</td>
+          <td class="audio-cell">
+            vision
+            <button class="play-btn" onclick="speak('vision')">Play</button>
+          </td>
+          <td>/ˈvɪʒən/</td>
+          <td class="korean-desc">
+            유성음. 성대를 울리며 /ʃ/처럼 발음. 한국어에 없는 "ㅈ" 비슷.
+          </td>
+          <td class="example-sentence">
+            /klɪr ˈvɪʒən hɛlps/ <br />
+            Clear vision helps. <br />
+            (맑은 시야가 도움이 된다.)
+            <button class="play-btn" onclick="speak('Clear vision helps')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/h/</td>
+          <td class="audio-cell">
+            hat <button class="play-btn" onclick="speak('hat')">Play</button>
+          </td>
+          <td>/ˈhæt/</td>
+          <td class="korean-desc">
+            무성음 "ㅎ". 목에서 공기를 뿜음. 한국어 "히"의 "ㅎ".
+          </td>
+          <td class="example-sentence">
+            /wɛr jʊr hæt/ <br />
+            Wear your hat. <br />
+            (모자를 써.)
+            <button class="play-btn" onclick="speak('Wear your hat')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/tʃ/</td>
+          <td class="audio-cell">
+            chair
+            <button class="play-btn" onclick="speak('chair')">Play</button>
+          </td>
+          <td>/ˈtʃɛr/</td>
+          <td class="korean-desc">
+            무성음 "ㅊ". 혀를 입천장에 대고 공기를 터뜨림. 한국어 "치"의 "ㅊ".
+          </td>
+          <td class="example-sentence">
+            /sɪt ɑːn ðə tʃɛr/ <br />
+            Sit on the chair. <br />
+            (의자에 앉아.)
+            <button class="play-btn" onclick="speak('Sit on the chair')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/dʒ/</td>
+          <td class="audio-cell">
+            jump <button class="play-btn" onclick="speak('jump')">Play</button>
+          </td>
+          <td>/ˈdʒʌmp/</td>
+          <td class="korean-desc">
+            유성음 "ㅈ". 성대를 울리며 /tʃ/처럼. 한국어 "지"와 비슷.
+          </td>
+          <td class="example-sentence">
+            /dʒʌmp ˈoʊvər ɪt/ <br />
+            Jump over it! <br />
+            (그 위로 뛰어!)
+            <button class="play-btn" onclick="speak('Jump over it')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/m/</td>
+          <td class="audio-cell">
+            man <button class="play-btn" onclick="speak('man')">Play</button>
+          </td>
+          <td>/ˈmæn/</td>
+          <td class="korean-desc">
+            유성음 "ㅁ". 입술을 다물고 성대 울림. 한국어 "미"의 "ㅁ".
+          </td>
+          <td class="example-sentence">
+            /ðə mæn ɪz tɑːl/ <br />
+            The man is tall. <br />
+            (그 남자는 키가 크다.)
+            <button class="play-btn" onclick="speak('The man is tall')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/n/</td>
+          <td class="audio-cell">
+            no <button class="play-btn" onclick="speak('no')">Play</button>
+          </td>
+          <td>/ˈnoʊ/</td>
+          <td class="korean-desc">
+            유성음 "ㄴ". 혀를 잇몸에 대고 성대 울림. 한국어 "니"의 "ㄴ".
+          </td>
+          <td class="example-sentence">
+            /noʊ aɪ woʊnt goʊ/ <br />
+            No, I won't go. <br />
+            (아니, 나 안 갈 거야.)
+            <button class="play-btn" onclick="speak('No, I won\'t go')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/ŋ/</td>
+          <td class="audio-cell">
+            sing <button class="play-btn" onclick="speak('sing')">Play</button>
+          </td>
+          <td>/ˈsɪŋ/</td>
+          <td class="korean-desc">
+            유성음 "ㅇ". 혀를 뒤로 하고 성대 울림. 한국어 "싱"의 "ㅇ".
+          </td>
+          <td class="example-sentence">
+            /sɪŋ ə sɑːŋ/ <br />
+            Sing a song. <br />
+            (노래를 불러.)
+            <button class="play-btn" onclick="speak('Sing a song')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/l/</td>
+          <td class="audio-cell">
+            love <button class="play-btn" onclick="speak('love')">Play</button>
+          </td>
+          <td>/ˈlʌv/</td>
+          <td class="korean-desc">
+            유성음 "ㄹ". 혀를 잇몸에 대고 공기 흐름. 한국어 "리"의 "ㄹ".
+          </td>
+          <td class="example-sentence">
+            /lʌv ɪz blaɪnd/ <br />
+            Love is blind. <br />
+            (사랑은 맹목적이다.)
+            <button class="play-btn" onclick="speak('Love is blind')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/ɹ/</td>
+          <td class="audio-cell">
+            red <button class="play-btn" onclick="speak('red')">Play</button>
+          </td>
+          <td>/ˈɹɛd/</td>
+          <td class="korean-desc">
+            유성음. 혀를 입천장 근처로 말아 올림. 한국어 "리"와 다른 미국식 "r".
+          </td>
+          <td class="example-sentence">
+            /ðə ɹɛd roʊz/ <br />
+            The red rose. <br />
+            (빨간 장미.)
+            <button class="play-btn" onclick="speak('The red rose')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/j/</td>
+          <td class="audio-cell">
+            yes <button class="play-btn" onclick="speak('yes')">Play</button>
+          </td>
+          <td>/ˈjɛs/</td>
+          <td class="korean-desc">
+            유성음 "ㅣ". 혀를 입천장에 대고 부드럽게. 한국어 "예"의 "ㅣ".
+          </td>
+          <td class="example-sentence">
+            /jɛs juː meɪ/ <br />
+            Yes, you may. <br />
+            (응, 해도 돼.)
+            <button class="play-btn" onclick="speak('Yes, you may')">
+              Play
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>/w/</td>
+          <td class="audio-cell">
+            wet <button class="play-btn" onclick="speak('wet')">Play</button>
+          </td>
+          <td>/ˈwɛt/</td>
+          <td class="korean-desc">
+            유성음 "ㅜ". 입술을 둥글게 하고 부드럽게. 한국어 "위"의 "ㅜ".
+          </td>
+          <td class="example-sentence">
+            /ðə flɔːr ɪz wɛt/ <br />
+            The floor is wet. <br />
+            (바닥이 젖었다.)
+            <button class="play-btn" onclick="speak('The floor is wet')">
+              Play
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      function speak(text) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "en-US";
+        utterance.volume = 1.0;
+        utterance.rate = 0.6;
+        utterance.pitch = 1.0;
+        window.speechSynthesis.speak(utterance);
+      }
+    </script>
+  </body>
+</html>
